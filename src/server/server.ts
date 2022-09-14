@@ -4,10 +4,10 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app: Express = express();
-const port = process.env.PORT;
+const port: string = process.env.PORT;
 
 // console.log("server.js is running", process.env);
-console.log("test")
+console.log('test');
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -20,15 +20,17 @@ app.use((req, res, next) => {
   next();
 });
 
+console.log('haha');
+
 app.get('/', (req: Request, res: Response) => {
   res.send('Express + TypeScript Server');
 });
 
 app.get('/test', (req: Request, res: Response) => {
-  console.log("AEHHFAHFAHF");
-  res.json({"key": "value test string"})
-})
+  console.log('AEHHFAHFAHF');
+  res.json({ key: 'value test string' });
+});
 
-app.listen(port, () => {
+app.listen(port, (): void => {
   console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
 });
