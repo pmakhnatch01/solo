@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const app: Express = express();
-const port: string = process.env.PORT;
+const port: string | undefined = process.env.PORT;
 
 // console.log("server.js is running", process.env);
 console.log('test');
@@ -32,5 +32,7 @@ app.get('/test', (req: Request, res: Response) => {
 });
 
 app.listen(port, (): void => {
-  console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
+  console.log(
+    `⚡️[server]: Server is running at https://localhost:${port ?? 'something'}`
+  );
 });
