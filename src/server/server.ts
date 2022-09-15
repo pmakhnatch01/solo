@@ -20,7 +20,7 @@ app.use((req, res, next) => {
   next();
 });
 
-console.log('haha');
+console.log('HAHA');
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Express + TypeScript Server');
