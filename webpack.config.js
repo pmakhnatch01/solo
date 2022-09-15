@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-vars */
-import webpack from 'webpack';
 import path from 'path';
 import url from 'url';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
@@ -69,7 +68,7 @@ export default {
       {
         test: /\.tsx?$/,
         use: 'ts-loader',
-        exclude: /node_modules/,        
+        exclude: /node_modules/,
       }
     ],
   },

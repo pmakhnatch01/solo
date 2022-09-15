@@ -21,6 +21,7 @@
   "ts-node": {
     "esm": true
   },
-  "include": ["src/client/**/*", "src/server/**/*"],
-  "exclude": ["node_modules"]
+  "include": ["src/client/**/*", "src/server/**/*", "./src/types/**/*"],
+  "exclude": ["node_modules"],
+  "typeRoots": ["./node_modules/@types", "./src/types"]
 }
