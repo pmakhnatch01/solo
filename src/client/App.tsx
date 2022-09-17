@@ -1,23 +1,22 @@
-import React, { FunctionComponent } from 'react';
+import React, { Fragment, ReactElement } from "react";
+// import "./App.css";
+import CssBaseline from "@mui/material/CssBaseline";
+import InputTodo from "./components/InputTodo";
+import ListTodos from "./components/ListTodos";
+import Container from "@mui/material/Container";
 
-const App: FunctionComponent = () => {
-  // const test: string = "test";
-  fetch('http://localhost:3000/test', {
-    headers: {
-      'Content-Type': 'application/json',
-      Accept: 'application/json'
-    }
-  })
-    .then(async (res) => res.json())
-    .then((data) => {
-      console.log('frontend, data: ', data);
-    })
-    .catch((err) => err);
+
+
+const App = (): ReactElement  => {
   return (
-    <div>
-      <h1>SOLO DOLO</h1>
-    </div>
+    <Fragment>
+      <CssBaseline />
+      <Container maxWidth="md">
+          <InputTodo />
+          <ListTodos />
+      </Container>
+    </Fragment>
   );
-};
+}
 
 export default App;

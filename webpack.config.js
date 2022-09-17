@@ -9,7 +9,7 @@ const __dirname = path.dirname(__filename);
 export default {
   entry: [
     // entry point of our app
-    './src/client/index.jsx',
+    './src/client/index.tsx',
   ],
   output: {
     path: path.resolve(__dirname, 'dist'),
