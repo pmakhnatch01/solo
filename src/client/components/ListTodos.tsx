@@ -29,18 +29,20 @@ interface ToDoV2Container extends Array<ToDoV2>{}
 
 const ListTodos = (props: any) => {
   // const [todos, setTodos] = useState<ToDoContainer>([]);
+  const todos2: ToDoV2Container = props.toDoList;
+  const setTodos2 = props.listTodosUpdate;
 
-  const [todos2, setTodos2] = useState<ToDoV2Container>([]);
+  // const [todos2, setTodos2] = useState<ToDoV2Container>([]);
 
-  const getTodos2 = async () => {
-    try {
-      const response = await fetch('http://localhost:3000/tasks/user/1');
-      const jsonData = await response.json();
-      setTodos2(jsonData);
-    } catch (error: any) {
-      console.error(error.message);
-    }
-  }
+  // const getTodos2 = async () => {
+  //   try {
+  //     const response = await fetch('http://localhost:3000/tasks/user/1');
+  //     const jsonData = await response.json();
+  //     setTodos2(jsonData);
+  //   } catch (error: any) {
+  //     console.error(error.message);
+  //   }
+  // }
 
   const deleteTodo2 = async (id: string) => {
     try {
@@ -56,17 +58,16 @@ const ListTodos = (props: any) => {
   }
 
   const completeTodo2 = (id: string) => {
-    console.log("copleteTodo2")
+
   }
 
   const listTodosUpdate = (arg: any) => {
     setTodos2(arg);
   }
 
-  useEffect(() => {
-    getTodos2();
-    console.log("useEffect", todos2)
-  }, []);
+  // useEffect(() => {
+  //   getTodos2();
+  // }, []);
 
   return (
     <Fragment>

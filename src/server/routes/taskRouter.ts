@@ -19,13 +19,11 @@ router.post('/', createTask, (req: Request, res: Response) => {
 
 // update a specific task
 router.patch('/:tid', updateDescription, (req: Request, res: Response) => {
-  console.log(res.locals.updatedTasks);
   res.status(201).json(res.locals.updatedTasks);
 })
 
 // delete a task
 router.delete('/user/:uid/:tid', deleteTask, (req: Request, res: Response) => {
-  console.log(res.locals.updatedTasks);
   res.status(201).json(res.locals.updatedTasks);
 })
 

@@ -32,8 +32,4 @@ const showUsers = async (req: Request, res: Response, next: NextFunction): Promi
   }
 }
 
-const best = ():void => {
-  console.log("HELLO WORLD")
-}
-
-export { best, createUser, showUsers };
+export { createUser, showUsers };

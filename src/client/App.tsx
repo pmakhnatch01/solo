@@ -1,10 +1,10 @@
 import React, { Fragment, ReactElement } from "react";
 // import "./App.css";
 import CssBaseline from "@mui/material/CssBaseline";
-import InputTodo from "./components/InputTodo";
-import ListTodos from "./components/ListTodos";
+// import InputTodo from "./components/InputTodo";
+// import ListTodos from "./components/ListTodos";
 import Container from "@mui/material/Container";
-
+import UserTodoList from "./components/UserTodoList"
 
 
 const App = (): ReactElement  => {
@@ -12,8 +12,7 @@ const App = (): ReactElement  => {
     <Fragment>
       <CssBaseline />
       <Container maxWidth="md">
-          <InputTodo />
-          <ListTodos />
+        <UserTodoList />
       </Container>
     </Fragment>
   );

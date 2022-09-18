@@ -14,7 +14,8 @@ const createTask = async (req: Request, res: Response, next: NextFunction): Prom
       user: '63239fcfdb5a5873036f2a37'
     });
     await createdTask.save();
-    res.locals.newTask = createdTask.toObject();
+    const updatedTasks = await Task.find();
+    res.locals.newTask = updatedTasks;
     next();
   } catch (err) {
     return next(err);
@@ -40,7 +41,6 @@ const updateDescription = async (req: Request, res: Response, next: NextFunction
     const updatedTask = await Task.findOneAndUpdate({ _id: taskId }, { description: description }, { new: true });
     const updatedTasks = await Task.find();
     res.locals.updatedTasks = updatedTasks;
-    console.log("taskController", "updatedTasks", updatedTasks)
     return next();
   } catch (err) {
     return next(err);

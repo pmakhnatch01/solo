@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect } from "react";
 import ListTodos from "./ListTodos";
-import EditTodo from "./EditTodo";
+import InputTodo from "./InputTodo";
 
 export interface ToDoV2 {
   _id: string;
@@ -15,7 +15,7 @@ interface ToDoV2Container extends Array<ToDoV2>{}
 const UserTodoList = (): any => {
   const [todos2, setTodos2] = useState<ToDoV2Container>([]);
 
-  const getTodos2 = async () => {
+  const getTodos2 = async (): Promise<void> => {
     try {
       const response = await fetch('http://localhost:3000/tasks/user/1');
       const jsonData = await response.json();
@@ -27,7 +27,6 @@ const UserTodoList = (): any => {
 
   useEffect(() => {
     getTodos2();
-    console.log("useEffect", todos2)
   }, []);
 
   const listTodosUpdate = (arg: any) => {
@@ -36,14 +35,9 @@ const UserTodoList = (): any => {
 
   return (
     <Fragment>
-      <ListTodos listTodosUpdate={listTodosUpdate} toDoList={todos2}>
-
-      </ListTodos>
-      <EditTodo listTodosUpdate={listTodosUpdate} toDoList={todos2}>
-
-      </EditTodo>
+      <InputTodo listTodosUpdate={listTodosUpdate} toDoList={todos2}></InputTodo>
+      <ListTodos listTodosUpdate={listTodosUpdate} toDoList={todos2}></ListTodos>
     </Fragment>
-
   )
 }
 

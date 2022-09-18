@@ -19,14 +19,14 @@ import CloseIcon from "@mui/icons-material/Close";
 //   };
 // }
 
-interface ToDoV2 {
-  todo: {
-    _id: string;
-    description: string;
-    time: Date,
-    completed: boolean
-  }
-}
+// interface ToDoV2 {
+//   todo: {
+//     _id: string;
+//     description: string;
+//     time: Date,
+//     completed: boolean
+//   }
+// }
 
 const EditTodo = (props:any): any => {
   const todo = props.todo;
@@ -34,19 +34,18 @@ const EditTodo = (props:any): any => {
   const [description, setDescription] = useState(todo.description);
   const [open, setOpen] = useState(false);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (): any => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = (): any => {
     setOpen(false);
   };
 
-  const updateTaskDescription = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const updateTaskDescription = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> => {
     event.preventDefault();
     try {
       const body = { description };
-      console.log("updateTaskDescription", body, todo._id)
       // invoke a *function that changes
       // setDescription()
       const response = await fetch (`http://localhost:3000/tasks/${todo._id}`, {
@@ -56,17 +55,11 @@ const EditTodo = (props:any): any => {
       });
       const jsonData = await response.json();
       listTodosUpdate(jsonData);
-      // console.log("EditTodo ", "updateTaskDescription ", "todo ", todo, "response ", response)
       // window.location.reload();
     } catch (error: any) {
       console.error(error.message)
     }
   }
-  // const test = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-  //   console.log("LOLE")
-  //   const body = { description };
-  //   console.log(body, todo._id)
-  // }
 
   return (
     <Fragment>

@@ -50,7 +50,6 @@ app.get('/', (req: Request, res: Response): void => {
   res.send('Express + TypeScript Server');
 });
 app.get('/test', (req: Request, res: Response): void => {
-  console.log('AEHHFAHFAHF');
   res.json({ key: 'value test string' });
 });
 
