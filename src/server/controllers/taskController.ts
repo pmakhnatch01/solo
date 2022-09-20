@@ -6,12 +6,12 @@ import { Types, ObjectId } from 'mongoose';
 
 const createTask = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const { time, description, type } = req.body as Pick<TaskInterface, 'time' | 'description' | 'type'>;
+    const { time, description, type, user } = req.body as Pick<TaskInterface, 'time' | 'description' | 'type' | 'user' >;
     const createdTask = new Task({
       time,
       description,
       type,
-      user: '63239fcfdb5a5873036f2a37'
+      user: user
     });
     await createdTask.save();
     const updatedTasks = await Task.find();

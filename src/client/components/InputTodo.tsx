@@ -17,6 +17,8 @@ interface ToDoV2Container extends Array<ToDoV2>{}
 
 const InputTodo = (props:any):ReactElement => {
   const [description, setDescription] = useState("");
+  const userId = props.userId;
+
   const dummyUser = {
     name: "peter",
     email: "peter@gmail.com",
@@ -46,7 +48,7 @@ const InputTodo = (props:any):ReactElement => {
     event.preventDefault();
     try {
       console.log("InputTodo - onSubmitForm2", description);
-      const body = { description, "time": "2002-12-13T11:22", "type": "222" };
+      const body = { description, "time": "2002-12-13T11:22", "type": "222", user: userId};
       const response = await fetch (`http://localhost:3000/tasks/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

@@ -13,12 +13,13 @@ export interface ToDoV2 {
 // interface ToDoContainer extends Array<ToDo> {}
 interface ToDoV2Container extends Array<ToDoV2>{}
 
-const UserTodoList = (): any => {
+const UserTodoList = (props: any): any => {
   const [todos2, setTodos2] = useState<ToDoV2Container>([]);
+  const userId = props.userId;
 
   const getTodos2 = async (): Promise<void> => {
     try {
-      const response = await fetch('http://localhost:3000/tasks/user/1');
+      const response = await fetch(`http://localhost:3000/tasks/user/1`);
       const jsonData = await response.json();
       setTodos2(jsonData);
     } catch (error: any) {
@@ -36,8 +37,8 @@ const UserTodoList = (): any => {
 
   return (
     <Fragment>
-      <InputTodo listTodosUpdate={listTodosUpdate} toDoList={todos2}></InputTodo>
-      <ListTodos listTodosUpdate={listTodosUpdate} toDoList={todos2}></ListTodos>
+      <InputTodo listTodosUpdate={listTodosUpdate} toDoList={todos2} userId={userId} key ={userId}></InputTodo>
+      <ListTodos listTodosUpdate={listTodosUpdate} toDoList={todos2} userId={userId} key ={userId}></ListTodos>
     </Fragment>
   )
 }

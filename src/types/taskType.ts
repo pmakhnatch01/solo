@@ -5,5 +5,5 @@ export interface TaskInterface extends Document {
   description: string,
   type: string,
   completed: boolean,
-  users: Types.ObjectId[]
+  user: Types.ObjectId[]
 }
