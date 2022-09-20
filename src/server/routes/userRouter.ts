@@ -1,5 +1,5 @@
 import { Request, Response, Router } from 'express';
-import { createUser, showUsers } from '../controllers/userController.js'
+import { createUser, showUsers, showUser } from '../controllers/userController.js'
 
 const router: Router = Router()
 
@@ -17,7 +17,9 @@ router.post('/signup', createUser, (req: Request, res: Response) => {
 });
 
 // login user
-router.post('/login')
+router.post('/login', showUser, (req: Request, res:Response) => {
+  res.status(201).json(res.locals.user)
+})
 
 
 

@@ -62,7 +62,7 @@ const loginSchema = object({
 // 👇 Infer the Schema to get the TS Type
 type ILogin = TypeOf<typeof loginSchema>;
 
-const LoginPage: FC = () => {
+const LoginPage: FC = (props: any): any => {
   // 👇 Default Values
   const defaultValues: ILogin = {
     email: '',
@@ -75,10 +75,30 @@ const LoginPage: FC = () => {
     defaultValues,
   });
 
+
+  const currentUserId = props.currentUserId;
   // 👇 Submit Handler
-  const onSubmitHandler: SubmitHandler<ILogin> = (values: ILogin) => {
-    console.log(values);
+  const onSubmitHandler: SubmitHandler<ILogin> = async (values: ILogin): Promise<void> => {
+    try {
+      console.log(values);
+      const body = { email: values.email, password: values.password }
+      console.log("login -> onSubmitHandler", body)
+      const response = await fetch(`http://localhost:3000/users/login/`, {
+        method: 'GET',
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+      });
+      const jsonData = await response.json();
+      console.log("login.page -> onSubmitHandler", jsonData);
+    } catch(error: any) {
+      console.log(error);
+    }
   };
+
+  const test = (event: any) => {
+    event.preventDefault();
+    console.log("test")
+  }
 
   // 👇 JSX to be rendered
   return (

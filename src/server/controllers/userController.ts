@@ -32,4 +32,20 @@ const showUsers = async (req: Request, res: Response, next: NextFunction): Promi
   }
 }
 
-export { createUser, showUsers };
+const showUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+  try {
+    const { email, password } = req.body as Pick<UserInterface, 'email' | 'password'>;
+    const user: any = await User.find({ email, password });
+    console.log("userController -> showUser -> user", user);
+    if (!user) {
+      res.locals.user = 'user_not_found'
+    } else {
+      res.locals.user = user;
+      next();
+    }
+  } catch (err) {
+    next(err);
+  }
+}
+
+export { createUser, showUsers, showUser };

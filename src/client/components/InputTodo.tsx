@@ -19,11 +19,11 @@ const InputTodo = (props:any):ReactElement => {
   const [description, setDescription] = useState("");
   const userId = props.userId;
 
-  const dummyUser = {
-    name: "peter",
-    email: "peter@gmail.com",
-    password: "asd123",
-  }
+  // const dummyUser = {
+  //   name: "peter",
+  //   email: "peter@gmail.com",
+  //   password: "asd123",
+  // }
   const todos2: ToDoV2Container = props.toDoList;
   const setTodos2 = props.listTodosUpdate;
 
@@ -47,7 +47,6 @@ const InputTodo = (props:any):ReactElement => {
   const onSubmitForm2 = async (event: any) => {
     event.preventDefault();
     try {
-      console.log("InputTodo - onSubmitForm2", description);
       const body = { description, "time": "2002-12-13T11:22", "type": "222", user: userId};
       const response = await fetch (`http://localhost:3000/tasks/`, {
         method: "POST",

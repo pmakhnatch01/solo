@@ -11,10 +11,10 @@ const createTask = async (req: Request, res: Response, next: NextFunction): Prom
       time,
       description,
       type,
-      user: user
+      user
     });
     await createdTask.save();
-    const updatedTasks = await Task.find();
+    const updatedTasks = await Task.find({ user });
     res.locals.newTask = updatedTasks;
     next();
   } catch (err) {
@@ -25,8 +25,9 @@ const createTask = async (req: Request, res: Response, next: NextFunction): Prom
 // show all tasks
 const showTasks = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
-    const allTasks: TaskInterface[] = await Task.find();
-    res.locals.allTasks = allTasks;
+    const userId = req.params.uid;
+    const allUserTasks: TaskInterface[] = await Task.find({ user: userId });
+    res.locals.allUserTasks = allUserTasks;
     next();
   } catch (err) {
     return next(err);
@@ -53,7 +54,7 @@ const deleteTask = async (req: Request, res: Response, next: NextFunction): Prom
     const taskId = req.params.tid;
     const userId = req.params.uid;
     await Task.findOneAndDelete({ _id: taskId });
-    const updatedTasks = await Task.find();
+    const updatedTasks = await Task.find({ user:userId });
     res.locals.updatedTasks = updatedTasks;
     return next();
   } catch (err) {

@@ -1,8 +1,10 @@
-import express, { Express, Request, Response } from 'express';
+import express, { Express, Request, Response, NextFunction } from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRouter from './routes/userRouter.js'
 import taskRouter from './routes/taskRouter.js'
+import type { ErrorRequestHandler } from "express";
+import { request } from 'http';
 
 dotenv.config();
 
@@ -53,7 +55,18 @@ app.get('/test', (req: Request, res: Response): void => {
   res.json({ key: 'value test string' });
 });
 
+app.use((request: Request, response: Response, next: NextFunction) => {
+  throw new Error ("lole");
+})
+
+
 // GLOBAL ERROR MIDDLEWARE
+const errorHandler: ErrorRequestHandler = (err, request: Request, response: Response, next: NextFunction): any => {
+  console.log("errorHandler")
+  response.status(404).json(`This URL is not found - try another one :)`);
+};
+
+app.use(errorHandler);
 
 // start up a node/express server
 app.listen(port, (): void => {

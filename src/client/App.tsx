@@ -19,7 +19,7 @@ const App = (): ReactElement  => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState('');
 
-  const createUserId = (userId: any): any => {
+  const currentUserId = (userId: any): any => {
     setUserId(userId);
     console.log("App -> createUserId", userId);
   }
@@ -37,7 +37,7 @@ const App = (): ReactElement  => {
       <CssBaseline />
       <Routes>
         <Route path='/' element={<LoginPage />} />
-        <Route path='/signup' element={<SignupPage createUserId={createUserId} />} />
+        <Route path='/signup' element={<SignupPage currentUserId={currentUserId} />} />
         <Route path='/todolist' element={<Test></Test>} />
       </Routes>
     </>

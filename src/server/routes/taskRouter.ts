@@ -9,7 +9,7 @@ router.get('/:tid')
 
 // get all tasks per user
 router.get('/user/:uid', showTasks, (req: Request, res: Response) => {
-  res.status(201).json(res.locals.allTasks);
+  res.status(201).json(res.locals.allUserTasks);
 });
 
 // create a task ~ user will be passed in w/ the body

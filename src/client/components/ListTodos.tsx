@@ -31,6 +31,7 @@ const ListTodos = (props: any) => {
   // const [todos, setTodos] = useState<ToDoContainer>([]);
   const todos2: ToDoV2Container = props.toDoList;
   const setTodos2 = props.listTodosUpdate;
+  const userId = props.userId;
 
   // const [todos2, setTodos2] = useState<ToDoV2Container>([]);
 
@@ -46,7 +47,7 @@ const ListTodos = (props: any) => {
 
   const deleteTodo2 = async (id: string) => {
     try {
-      const response = await fetch(`http://localhost:3000/tasks/user/1/${id}`, {
+      const response = await fetch(`http://localhost:3000/tasks/user/${userId}/${id}`, {
           method: "DELETE",
         }
       )

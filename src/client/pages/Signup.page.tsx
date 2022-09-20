@@ -43,7 +43,7 @@ const SignupPage = (props: any): any => {
   });
 
   const navigate = useNavigate();
-  const createUserId = props.createUserId;
+  const currentUserId = props.currentUserId;
 
   // 👇 Form Handler
   const onSubmitHandler: SubmitHandler<ISignUp> = async (values: ISignUp): Promise<void> => {
@@ -57,7 +57,7 @@ const SignupPage = (props: any): any => {
       });
       const jsonData = await userId.json();
       console.log("Signup.page -> onSubmitHandler ", jsonData);
-      createUserId(jsonData._id);
+      currentUserId(jsonData._id);
       navigate('/todolist');
     } catch(error: any) {
       console.log(error);
