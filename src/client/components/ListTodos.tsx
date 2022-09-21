@@ -30,7 +30,6 @@ interface ToDoV2Container extends Array<ToDoV2>{}
 const ListTodos = (props: any) => {
   // const [todos, setTodos] = useState<ToDoContainer>([]);
   const todos2: ToDoV2Container = props.toDoList;
-  console.log("ListTodos", todos2);
   const setTodos2 = props.listTodosUpdate;
   const userId = props.userId;
 
@@ -84,7 +83,7 @@ const ListTodos = (props: any) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {todos2
+          {todos2.length > 0 && todos2
             .sort((a:any, b:any) => a.time - b.time)
             .map((todo) => {
               return (

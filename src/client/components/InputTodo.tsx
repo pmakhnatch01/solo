@@ -50,6 +50,7 @@ const InputTodo = (props:any):ReactElement => {
     event.preventDefault();
     try {
       const body = { description, "time": timeAndDate, "type": "222", user: userId};
+      console.log("InputTodo -> onSubmitForm2 -> body", body)
       const response = await fetch (`http://localhost:3000/tasks/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
