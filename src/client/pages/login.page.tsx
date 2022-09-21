@@ -11,7 +11,7 @@ import {
 import LoadingButton from '@mui/lab/LoadingButton';
 import React, { FC } from 'react';
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { literal, object, string, TypeOf } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import FormInput from '../components/FormInput';
@@ -29,26 +29,6 @@ export const LinkItem = styled(Link)`
   }
 `;
 
-// 👇 Styled Material UI Link Component
-export const OauthMuiLink = styled(MuiLink)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: #f5f6f7;
-  border-radius: 1;
-  padding: 0.6rem 0;
-  column-gap: 1rem;
-  text-decoration: none;
-  color: #393e45;
-  font-weight: 500;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #fff;
-    box-shadow: 0 1px 13px 0 rgb(0 0 0 / 15%);
-  }
-`;
-
 // 👇 Login Schema with Zod
 const loginSchema = object({
   email: string().min(1, 'Email is required').email('Email is invalid'),
@@ -62,7 +42,7 @@ const loginSchema = object({
 // 👇 Infer the Schema to get the TS Type
 type ILogin = TypeOf<typeof loginSchema>;
 
-const LoginPage: FC = (props: any): any => {
+const LoginPage = (props: any): any => {
   // 👇 Default Values
   const defaultValues: ILogin = {
     email: '',
@@ -77,26 +57,33 @@ const LoginPage: FC = (props: any): any => {
 
 
   const currentUserId = props.currentUserId;
+  const navigate = useNavigate();
+
   // 👇 Submit Handler
   const onSubmitHandler: SubmitHandler<ILogin> = async (values: ILogin): Promise<void> => {
     try {
       console.log(values);
       const body = { email: values.email, password: values.password }
       console.log("login -> onSubmitHandler", body)
-      const response = await fetch(`http://localhost:3000/users/login/`, {
-        method: 'GET',
+      const response = await fetch(`http://localhost:3000/users/login`, {
+        method: 'POST',
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
       });
       const jsonData = await response.json();
-      console.log("login.page -> onSubmitHandler", jsonData);
+      if (jsonData === 'no_user_found') throw new Error ('No user found');
+      else {
+        console.log("login.page -> onSubmitHandler", jsonData);
+        currentUserId(jsonData._id);
+        navigate('/todolist');
+      }
     } catch(error: any) {
       console.log(error);
     }
   };
 
   const test = (event: any) => {
-    event.preventDefault();
+    console.log("login -> test", methods)
     console.log("test")
   }
 
@@ -116,7 +103,6 @@ const LoginPage: FC = (props: any): any => {
           item
           sx={{ maxWidth: '70rem', width: '100%', backgroundColor: '#fff' }}
         >
-          <FormProvider {...methods}>
             <Grid
               container
               sx={{
@@ -125,6 +111,7 @@ const LoginPage: FC = (props: any): any => {
                 px: '1rem',
               }}
             >
+            <FormProvider {...methods}>
               <Grid
                 item
                 container
@@ -165,30 +152,6 @@ const LoginPage: FC = (props: any): any => {
                       required
                       focused
                     />
-
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          size='small'
-                          aria-label='trust this device checkbox'
-                          required
-                          {...methods.register('persistUser')}
-                        />
-                      }
-                      label={
-                        <Typography
-                          variant='body2'
-                          sx={{
-                            fontSize: '0.8rem',
-                            fontWeight: 400,
-                            color: '#5e5b5d',
-                          }}
-                        >
-                          Trust this device
-                        </Typography>
-                      }
-                    />
-
                     <LoadingButton
                       loading={false}
                       type='submit'
@@ -212,8 +175,8 @@ const LoginPage: FC = (props: any): any => {
                   </Typography>
                 </Stack>
               </Grid>
-            </Grid>
-          </FormProvider>
+            </FormProvider>
+          </Grid>
         </Grid>
       </Grid>
     </Container>

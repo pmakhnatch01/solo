@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import FormInput from '../components/FormInput';
 // import { ReactComponent as GoogleLogo } from './../assets/google.svg';
 // import { ReactComponent as GitHubLogo } from './../assets/github.svg';
-import { LinkItem, OauthMuiLink } from './login.page';
+import { LinkItem } from './login.page';
 import { Link, useNavigate } from 'react-router-dom';
 
 // 👇 SignUp Schema with Zod
@@ -112,7 +112,7 @@ const SignupPage = (props: any): any => {
                       component='h1'
                       sx={{ textAlign: 'center', mb: '1.5rem' }}
                     >
-                      Create new your account
+                      Create a new account
                     </Typography>
 
                     <FormInput

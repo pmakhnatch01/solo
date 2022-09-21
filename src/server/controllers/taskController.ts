@@ -27,7 +27,9 @@ const showTasks = async (req: Request, res: Response, next: NextFunction): Promi
   try {
     const userId = req.params.uid;
     const allUserTasks: TaskInterface[] = await Task.find({ user: userId });
+    const name:any = await User.findOne({ user: userId });
     res.locals.allUserTasks = allUserTasks;
+    res.locals.name = name.name;
     next();
   } catch (err) {
     return next(err);
@@ -38,9 +40,9 @@ const showTasks = async (req: Request, res: Response, next: NextFunction): Promi
 const updateDescription = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const taskId = req.params.tid;
-    const { description } = req.body as Pick<TaskInterface, 'description'>;
-    const updatedTask = await Task.findOneAndUpdate({ _id: taskId }, { description: description }, { new: true });
-    const updatedTasks = await Task.find();
+    const { description, user } = req.body as Pick<TaskInterface, 'description' | 'user'>;
+    const updatedTask = await Task.findOneAndUpdate({ _id: taskId }, { description }, { new: true });
+    const updatedTasks = await Task.find({ user });
     res.locals.updatedTasks = updatedTasks;
     return next();
   } catch (err) {

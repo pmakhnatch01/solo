@@ -1,7 +1,11 @@
 import React, { Fragment, useState, useEffect } from "react";
 import ListTodos from "./ListTodos";
 import InputTodo from "./InputTodo";
+import LoadingButton from '@mui/lab/LoadingButton';
+import { Grid, Button } from '@mui/material';
 // import { BrowserRouter as Router } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+
 
 export interface ToDoV2 {
   _id: string;
@@ -15,17 +19,22 @@ interface ToDoV2Container extends Array<ToDoV2>{}
 
 const UserTodoList = (props: any): any => {
   const [todos2, setTodos2] = useState<ToDoV2Container>([]);
+
+
   const userId = props.userId;
+  const currentUserId = props.currentUserId;
+  const navigate = useNavigate();
 
   const getTodos2 = async (): Promise<void> => {
     try {
       const response = await fetch(`http://localhost:3000/tasks/user/${userId}`);
       const jsonData = await response.json();
-      setTodos2(jsonData);
+      setTodos2(jsonData.userTasks);
     } catch (error: any) {
       console.error(error.message);
     }
   }
+
 
   useEffect(() => {
     getTodos2();
@@ -35,8 +44,21 @@ const UserTodoList = (props: any): any => {
     setTodos2(arg);
   }
 
+  const logout = (user: any): void => {
+    console.log("UserTodoList => logout")
+    currentUserId('');
+    navigate('/');
+  }
+
   return (
     <Fragment>
+      <Grid container justifyContent="flex-end">
+        <Button
+          onClick={() => logout(userId)}
+        >
+            Logout
+        </Button>
+      </Grid>
       <InputTodo listTodosUpdate={listTodosUpdate} toDoList={todos2} userId={userId}></InputTodo>
       <ListTodos listTodosUpdate={listTodosUpdate} toDoList={todos2} userId={userId}></ListTodos>
     </Fragment>

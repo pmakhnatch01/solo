@@ -31,6 +31,7 @@ import CloseIcon from "@mui/icons-material/Close";
 const EditTodo = (props:any): any => {
   const todo = props.todo;
   const listTodosUpdate = props.listTodosUpdate;
+  const userId = props.userId;
   const [description, setDescription] = useState(todo.description);
   const [open, setOpen] = useState(false);
 
@@ -45,7 +46,7 @@ const EditTodo = (props:any): any => {
   const updateTaskDescription = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> => {
     event.preventDefault();
     try {
-      const body = { description };
+      const body = { description, user: userId };
       // invoke a *function that changes
       // setDescription()
       const response = await fetch (`http://localhost:3000/tasks/${todo._id}`, {

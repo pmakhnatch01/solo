@@ -20,7 +20,7 @@ import DoneIcon from "@mui/icons-material/Done";
 export interface ToDoV2 {
   _id: string;
   description: string;
-  time: Date,
+  time: string,
   completed: boolean
 }
 
@@ -30,6 +30,7 @@ interface ToDoV2Container extends Array<ToDoV2>{}
 const ListTodos = (props: any) => {
   // const [todos, setTodos] = useState<ToDoContainer>([]);
   const todos2: ToDoV2Container = props.toDoList;
+  console.log("ListTodos", todos2);
   const setTodos2 = props.listTodosUpdate;
   const userId = props.userId;
 
@@ -75,6 +76,7 @@ const ListTodos = (props: any) => {
       <Table sx={{ mt: 4 }}>
         <TableHead>
           <TableRow>
+            <TableCell>Time</TableCell>
             <TableCell>Description</TableCell>
             <TableCell>Edit</TableCell>
             <TableCell>Delete</TableCell>
@@ -83,7 +85,7 @@ const ListTodos = (props: any) => {
         </TableHead>
         <TableBody>
           {todos2
-            .sort((a, b) => +a.completed - +b.completed)
+            .sort((a:any, b:any) => a.time - b.time)
             .map((todo) => {
               return (
                 <TableRow key={todo._id}>
@@ -92,10 +94,17 @@ const ListTodos = (props: any) => {
                       todo.completed ? { textDecoration: "line-through" } : {}
                     }
                   >
+                    {todo.time}
+                  </TableCell>
+                  <TableCell
+                    style={
+                      todo.completed ? { textDecoration: "line-through" } : {}
+                    }
+                  >
                     {todo.description}
                   </TableCell>
                   <TableCell>
-                    <EditTodo todo={todo} key={todo._id} listTodosUpdate={listTodosUpdate} />
+                    <EditTodo todo={todo} key={todo._id} listTodosUpdate={listTodosUpdate} userId={userId} />
                   </TableCell>
                   <TableCell>
                     <IconButton

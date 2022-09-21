@@ -17,7 +17,9 @@ interface ToDoV2Container extends Array<ToDoV2>{}
 
 const InputTodo = (props:any):ReactElement => {
   const [description, setDescription] = useState("");
+  const [timeAndDate, setTimeAndDate] = useState('');
   const userId = props.userId;
+  const name = props.name;
 
   // const dummyUser = {
   //   name: "peter",
@@ -47,7 +49,7 @@ const InputTodo = (props:any):ReactElement => {
   const onSubmitForm2 = async (event: any) => {
     event.preventDefault();
     try {
-      const body = { description, "time": "2002-12-13T11:22", "type": "222", user: userId};
+      const body = { description, "time": timeAndDate, "type": "222", user: userId};
       const response = await fetch (`http://localhost:3000/tasks/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -57,16 +59,21 @@ const InputTodo = (props:any):ReactElement => {
       console.log("InputTodo - onSubmitForm2", jsonData)
       setTodos2(jsonData);
       setDescription("");
+      setTimeAndDate(new Date().toString());
     } catch (error: any) {
       console.error(error.message)
     }
+  }
+
+  const timeanddate = (event: any) => {
+    console.log(event)
   }
 
   return (
     <Fragment>
       <Box sx={{ mt: 8 }}>
         <Typography variant="h1" align="center">
-          CRUD BOYS
+          Todo List
         </Typography>
       </Box>
       <Box
@@ -75,12 +82,23 @@ const InputTodo = (props:any):ReactElement => {
         sx={{
           mt: 4,
           display: "flex",
-          width: 500,
+          width: 900,
           maxWidth: "100%",
           mx: "auto",
         }}
       >
         <TextField
+          id="datetime-local"
+          type="datetime-local"
+          // defaultValue="2017-05-24T10:30"
+          value={timeAndDate}
+          sx={{ width: 250 }}
+          onChange={(event) => setTimeAndDate(event.target.value)}
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+          <TextField
           label="Add new todo"
           variant="outlined"
           value={description}

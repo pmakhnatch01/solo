@@ -35,7 +35,7 @@ const showUsers = async (req: Request, res: Response, next: NextFunction): Promi
 const showUser = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const { email, password } = req.body as Pick<UserInterface, 'email' | 'password'>;
-    const user: any = await User.find({ email, password });
+    const user: any = await User.findOne({ email, password });
     console.log("userController -> showUser -> user", user);
     if (!user) {
       res.locals.user = 'user_not_found'

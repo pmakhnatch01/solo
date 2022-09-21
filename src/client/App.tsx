@@ -27,7 +27,7 @@ const App = (): ReactElement  => {
   const Test = () => {
     return (
       <Container maxWidth="md">
-        <UserTodoList userId={userId} />
+        <UserTodoList userId={userId} currentUserId={currentUserId} />
       </Container>
     )
   }
@@ -36,7 +36,7 @@ const App = (): ReactElement  => {
     <>
       <CssBaseline />
       <Routes>
-        <Route path='/' element={<LoginPage />} />
+        <Route path='/' element={<LoginPage currentUserId={currentUserId} />} />
         <Route path='/signup' element={<SignupPage currentUserId={currentUserId} />} />
         <Route path='/todolist' element={<Test></Test>} />
       </Routes>
