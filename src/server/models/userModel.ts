@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
+  passwordHashed: { type: String, required: true },
   tasks: [{ type: mongoose.Types.ObjectId, required: false, ref: 'Task' }]
 });
 

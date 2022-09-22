@@ -64,7 +64,7 @@ const LoginPage = (props: any): any => {
     try {
       console.log(values);
       const body = { email: values.email, password: values.password }
-      console.log("login -> onSubmitHandler", body)
+      console.log("login -> onSubmitHandler -> body", body)
       const response = await fetch(`http://localhost:3000/users/login`, {
         method: 'POST',
         headers: { "Content-Type": "application/json" },
@@ -73,7 +73,7 @@ const LoginPage = (props: any): any => {
       const jsonData = await response.json();
       if (jsonData === 'no_user_found') throw new Error ('No user found');
       else {
-        console.log("login.page -> onSubmitHandler", jsonData);
+        console.log("login.page -> onSubmitHandler -> jsonData", jsonData);
         currentUserId(jsonData._id);
         navigate('/todolist');
       }
