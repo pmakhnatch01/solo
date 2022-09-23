@@ -76,7 +76,8 @@ const UserTodoList = (props: any): any => {
       try {
         const response = await fetch(`http://localhost:3000/tasks/user/${userId}`);
         const jsonData = await response.json();
-        console.log("UserTodoList -> getTodos2 -> jsonData + types", jsonData, "time at [0]", jsonData.userTasks[0].time, "type", typeof jsonData.userTasks[0].time);
+        // console.log("UserTodoList -> getTodos2 -> jsonData + types", jsonData, "time at [0]", jsonData.userTasks[0].time, "type", typeof jsonData.userTasks[0].time);
+        console.log("UserTodoList -> getTodos2 -> jsonData.userTasks", jsonData.userTasks)
         setTodos2(jsonData.userTasks);
       } catch (error: any) {
         console.error(error.message);

@@ -52,6 +52,7 @@ const ListTodos = (props: any) => {
         }
       )
       const jsonData = await response.json();
+      console.log("ListTodos -> deleteTodo2 -> jsonData", jsonData);
       setTodos2(jsonData);
     } catch (error: any) {
       console.error(error.message);
@@ -69,7 +70,11 @@ const ListTodos = (props: any) => {
   // useEffect(() => {
   //   getTodos2();
   // }, []);
-  console.log("ListTodos -> todos2", todos2);
+  // console.log("ListTodos -> todos2", todos2);
+  useEffect(() => {
+    console.log("ListTodos -> useEffect -> todos2", todos2);
+
+  }, [todos2]);
 
 
   return (
@@ -86,7 +91,12 @@ const ListTodos = (props: any) => {
         </TableHead>
         <TableBody>
           {todos2.length > 0 && todos2
-            .sort((a:any, b:any) => a.time - b.time)
+            .sort((a:any, b:any) => {
+              const date1 = new Date(a.time);
+              const date2 = new Date(b.time);
+              return date1.getTime() - date2.getTime();
+
+            })
             .map((todo) => {
               return (
                 <TableRow key={todo._id}>

@@ -57,7 +57,8 @@ const InputTodo = (props:any):ReactElement => {
         body: JSON.stringify(body)
       });
       const jsonData = await response.json();
-      // console.log("InputTodo - onSubmitForm2", jsonData)
+      console.log("InputTodo - onSubmitForm2", jsonData)
+      let jsonDataToTime;
       setTodos2(jsonData);
       console.log("InputTodo -> onsubmitform2 -> TIME TYPE ???", typeof jsonData[0].time)
       setDescription('');

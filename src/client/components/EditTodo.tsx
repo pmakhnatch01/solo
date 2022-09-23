@@ -55,6 +55,7 @@ const EditTodo = (props:any): any => {
         body: JSON.stringify(body)
       });
       const jsonData = await response.json();
+      console.log("EditTodo -> updateTaskDescription -> jsonData", jsonData)
       listTodosUpdate(jsonData);
       // window.location.reload();
     } catch (error: any) {
