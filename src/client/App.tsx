@@ -21,7 +21,6 @@ const App = (): ReactElement  => {
 
   const currentUserId = (userId: any): any => {
     setUserId(userId);
-    console.log("App -> createUserId", userId);
   }
 
   const Test = () => {

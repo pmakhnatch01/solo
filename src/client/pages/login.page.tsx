@@ -62,7 +62,7 @@ const LoginPage = (props: any): any => {
   // 👇 Submit Handler
   const onSubmitHandler: SubmitHandler<ILogin> = async (values: ILogin): Promise<void> => {
     try {
-      console.log(values);
+      console.log("LOGIN -> onSubmitHandler", values)
       const body = { email: values.email, password: values.password }
       console.log("login -> onSubmitHandler -> body", body)
       const response = await fetch(`http://localhost:3000/users/login`, {

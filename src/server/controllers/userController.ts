@@ -47,6 +47,7 @@ const showUser = async (req: Request, res: Response, next: NextFunction): Promis
       password,
       user.passwordHashed
     );
+    console.log("userController -> showUser", user);
     if (!passwordCorrect) {
       res.locals.user = 'user_not_found'
     } else {

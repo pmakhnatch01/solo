@@ -7,6 +7,8 @@ import { Types, ObjectId } from 'mongoose';
 const createTask = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
   try {
     const { time, description, type, user } = req.body as Pick<TaskInterface, 'time' | 'description' | 'type' | 'user' >;
+    console.log(new Date(time));
+
     const createdTask = new Task({
       time,
       description,
@@ -15,6 +17,12 @@ const createTask = async (req: Request, res: Response, next: NextFunction): Prom
     });
     await createdTask.save();
     const updatedTasks = await Task.find({ user });
+    // console.log("taskController -> createTask -> updatedTasks", updatedTasks)
+    const findUser = await User.findOne({ _id: user })
+    // console.log("taskController -> createTask -> user", findUser);
+    const userDocument = await User.findOneAndUpdate({ _id: user }, { tasks: updatedTasks }, { new: true });
+    // await userDocument.save();
+    // console.log("taskController -> createTask -> userDocument", userDocument);
     res.locals.newTask = updatedTasks;
     next();
   } catch (err) {

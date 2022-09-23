@@ -69,6 +69,8 @@ const ListTodos = (props: any) => {
   // useEffect(() => {
   //   getTodos2();
   // }, []);
+  console.log("ListTodos -> todos2", todos2);
+
 
   return (
     <Fragment>

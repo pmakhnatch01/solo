@@ -50,25 +50,23 @@ const InputTodo = (props:any):ReactElement => {
     event.preventDefault();
     try {
       const body = { description, "time": timeAndDate, "type": "222", user: userId};
-      console.log("InputTodo -> onSubmitForm2 -> body", body)
+      // console.log("InputTodo -> onSubmitForm2 -> body", body)
       const response = await fetch (`http://localhost:3000/tasks/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body)
       });
       const jsonData = await response.json();
-      console.log("InputTodo - onSubmitForm2", jsonData)
+      // console.log("InputTodo - onSubmitForm2", jsonData)
       setTodos2(jsonData);
-      setDescription("");
-      setTimeAndDate(new Date().toString());
+      console.log("InputTodo -> onsubmitform2 -> TIME TYPE ???", typeof jsonData[0].time)
+      setDescription('');
+      setTimeAndDate('');
     } catch (error: any) {
       console.error(error.message)
     }
   }
 
-  const timeanddate = (event: any) => {
-    console.log(event)
-  }
 
   return (
     <Fragment>
@@ -89,11 +87,11 @@ const InputTodo = (props:any):ReactElement => {
         }}
       >
         <TextField
-          id="datetime-local"
-          type="datetime-local"
+          id="date"
+          type="date"
           // defaultValue="2017-05-24T10:30"
           value={timeAndDate}
-          sx={{ width: 250 }}
+          sx={{ width: 400 }}
           onChange={(event) => setTimeAndDate(event.target.value)}
           InputLabelProps={{
             shrink: true,

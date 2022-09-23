@@ -18,7 +18,7 @@ export interface ToDoV2 {
 interface ToDoV2Container extends Array<ToDoV2>{}
 
 const UserTodoList = (props: any): any => {
-  const [todos2, setTodos2] = useState<any>([]);
+  const [todos2, setTodos2] = useState<ToDoV2Container>([]);
 
 
 
@@ -71,31 +71,31 @@ const UserTodoList = (props: any): any => {
   //   // }
   //  }, [todos2]);
 
-  // useEffect(() => {
-  //   console.log("useEffect#3");
-  //   const getTodos2 = async (): Promise<void> => {
-  //     try {
-  //       const response = await fetch(`http://localhost:3000/tasks/user/${userId}`);
-  //       const jsonData = await response.json();
-  //       setTodos2(jsonData.userTasks);
-  //     } catch (error: any) {
-  //       console.error(error.message);
-  //     }
-  //   }
-  //   getTodos2().catch(console.error);
-  //   // console.log("UserToDoList -> useEffect -> getTodos2 -> (???) localStorage", window.localStorage)
-  //   // console.log("UserToDoList -> useEffect -> getTodos2 -> (???) userId", userId)
-  //   // console.log("UserToDoList -> useEffect -> getTodos2 -> (???) todos2", todos2)
-  //   if (todos2) window.localStorage.setItem('testPersistence', JSON.stringify(todos2));
-  //   if (userId) window.localStorage.setItem('userId', JSON.stringify(userId));
-  //   // window.localStorage.setItem('currentUserIdFUNCTION', JSON.stringify(currentUserId));
-  //   // const userId = props.userId;
-  //   // const currentUserId = props.currentUserId;
-  //   // console.log("UserToDoList -> useEffect -> getTodos2 -> (???) localStorage", window.localStorage)
-  //   // console.log("UserToDoList -> useEffect -> getTodos2 -> (???) userId", userId)
-  //   // console.log("UserToDoList -> useEffect -> getTodos2 -> (???) todos2", todos2)
+  useEffect(() => {
+    const getTodos2 = async (): Promise<void> => {
+      try {
+        const response = await fetch(`http://localhost:3000/tasks/user/${userId}`);
+        const jsonData = await response.json();
+        console.log("UserTodoList -> getTodos2 -> jsonData + types", jsonData, "time at [0]", jsonData.userTasks[0].time, "type", typeof jsonData.userTasks[0].time);
+        setTodos2(jsonData.userTasks);
+      } catch (error: any) {
+        console.error(error.message);
+      }
+    }
+    getTodos2().catch(console.error);
+    // console.log("UserToDoList -> useEffect -> getTodos2 -> (???) localStorage", window.localStorage)
+    // console.log("UserToDoList -> useEffect -> getTodos2 -> (???) userId", userId)
+    // console.log("UserToDoList -> useEffect -> getTodos2 -> (???) todos2", todos2)
+    // if (todos2) window.localStorage.setItem('testPersistence', JSON.stringify(todos2));
+    // if (userId) window.localStorage.setItem('userId', JSON.stringify(userId));
+    // window.localStorage.setItem('currentUserIdFUNCTION', JSON.stringify(currentUserId));
+    // const userId = props.userId;
+    // const currentUserId = props.currentUserId;
+    // console.log("UserToDoList -> useEffect -> getTodos2 -> (???) localStorage", window.localStorage)
+    // console.log("UserToDoList -> useEffect -> getTodos2 -> (???) userId", userId)
+    // console.log("UserToDoList -> useEffect -> getTodos2 -> (???) todos2", todos2)
+  }, []);
   // }, []);
-  // // }, []);
 
   const listTodosUpdate = (arg: any) => {
     setTodos2(arg);
