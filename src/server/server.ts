@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 // const password: string = process.env.DATABASE_PASSWORD !== undefined ? process.env.DATABASE_PASSWORD : '';
 // const DB: string = process.env.DATABASE !== undefined ? process.env.DATABASE.replace('<username>', username).replace('<password>', password) : '';
 
-// CONNECT TO THE DATABASE
+// // CONNECT TO THE DATABASE
 const uri: string = `mongodb+srv://${process.env.USERNAME}:${process.env.DATABASE_PASSWORD}@cluster0.fytg8r6.mongodb.net/?retryWrites=true&w=majority`
 const port: string = process.env.PORT !== undefined ? process.env.PORT : '';
 mongoose

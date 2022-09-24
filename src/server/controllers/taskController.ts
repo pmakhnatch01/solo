@@ -18,7 +18,7 @@ const createTask = async (req: Request, res: Response, next: NextFunction): Prom
     await createdTask.save();
     const updatedTasks = await Task.find({ user });
     // console.log("taskController -> createTask -> updatedTasks", updatedTasks)
-    const findUser = await User.findOne({ _id: user })
+    const findUser = await User.findOne({ _id: user });
     // console.log("taskController -> createTask -> user", findUser);
     const userDocument = await User.findOneAndUpdate({ _id: user }, { tasks: updatedTasks }, { new: true });
     // await userDocument.save();
